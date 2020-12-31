@@ -1,6 +1,6 @@
 project/TickableTest.cpp.o: ../../TickableTest.cpp ../../TickableTest.h \
  ../../WallClockTickable.h ../../ui/Displayable.h \
- /home/ghisi/.arduinocdt/libraries/U8g2/2.27.6/src/U8g2lib.h \
+ /home/ghisi/.arduinocdt/libraries/U8g2/2.28.10/src/U8g2lib.h \
  /home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/cores/arduino/Arduino.h \
  /home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/cores/arduino/binary.h \
  /home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/cores/arduino/WCharacter.h \
@@ -13,7 +13,7 @@ project/TickableTest.cpp.o: ../../TickableTest.cpp ../../TickableTest.h \
  /home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/cores/arduino/Arduino.h \
  /home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/variants/standard/pins_arduino.h \
  /home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/cores/arduino/Print.h \
- /home/ghisi/.arduinocdt/libraries/U8g2/2.27.6/src/U8x8lib.h \
- /home/ghisi/.arduinocdt/libraries/U8g2/2.27.6/src/clib/u8x8.h \
- /home/ghisi/.arduinocdt/libraries/U8g2/2.27.6/src/clib/u8g2.h \
- /home/ghisi/.arduinocdt/libraries/U8g2/2.27.6/src/clib/u8x8.h
+ /home/ghisi/.arduinocdt/libraries/U8g2/2.28.10/src/U8x8lib.h \
+ /home/ghisi/.arduinocdt/libraries/U8g2/2.28.10/src/clib/u8x8.h \
+ /home/ghisi/.arduinocdt/libraries/U8g2/2.28.10/src/clib/u8g2.h \
+ /home/ghisi/.arduinocdt/libraries/U8g2/2.28.10/src/clib/u8x8.h

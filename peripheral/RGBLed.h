@@ -6,6 +6,8 @@
  */
 
 #ifndef RGBLED_H_
+#include <stdio.h>
+#include "../ui/Displayable.h"
 #define RGBLED_H_
 
 class RGBLed {
@@ -19,6 +21,12 @@ public:
 	void redOff();
 	void greenOff();
 	void blueOff();
+	void display(U8G2 *u8g2);
+
+private:
+	bool red;
+	bool green;
+	bool blue;
 };
 
 #endif /* RGBLED_H_ */

@@ -11,14 +11,18 @@
 enum class InputEvent {
 	dialPlus,
 	dialMinus,
-	dialPushButtonDown,
-	dialPushButtonUp,
-	padUp,
-	padDown,
-	padLeft,
-	padRight,
-	padEnter
+	dialPushButtonPressed,
+	dialPushButtonReleased,
+	padUpPressed,
+	padUpReleased,
+	padDownPressed,
+	padDownReleased,
+	padLeftPressed,
+	padLeftReleased,
+	padRightPressed,
+	padRightReleased,
+	padEnterPressed,
+	padEnterReleased
 };
-
 
 #endif /* INPUT_INPUTEVENT_H_ */

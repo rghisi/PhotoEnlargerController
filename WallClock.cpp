@@ -26,7 +26,7 @@ void WallClock::setup() {
 	TIMSK1 |= (1 << OCIE1A);
 }
 
-void WallClock::handleTimerInterruption() {
+void WallClock::handleTimerInterrupt() {
 	count++;
 	if (count == 2000L) {
 		count = 0;

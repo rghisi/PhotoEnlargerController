@@ -16,7 +16,7 @@ class WallClock {
 public:
 	WallClock();
 	void setup();
-	void handleTimerInterruption();
+	void handleTimerInterrupt();
 	void reset();
 	void run(WallClockTickable *tickable);
 	void stop();
