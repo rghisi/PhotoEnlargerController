@@ -7,14 +7,22 @@
 
 #ifndef PERIPHERAL_LCD_H_
 #include <stdio.h>
+
+#include "SoftPWMOutput.h"
+#include "Configurations.h"
 #define PERIPHERAL_LCD_H_
 
 class LCD {
 public:
-	void setBrightness(uint8_t brightness);
-	uint8_t getBrightness();
+	LCD(SoftPWMOutput* backlightPWM, Configurations* configurations);
+	void IncreaseBrightness();
+	void DecreaseBrightness();
+	void SetBrightness(uint8_t brightness);
+	uint8_t GetBrightness();
+	void SaveBrightness();
 private:
-	uint8_t brightness;
+	SoftPWMOutput* backlight_pwm;
+	Configurations* configurations;
 
 };
 

@@ -6,7 +6,7 @@
  */
 
 #ifndef WALLCLOCK_H_
-#include "WallClockTickable.h"
+#include "WallClockListener.h"
 #include <stdint.h>
 #include <stdio.h>
 #include <avr/io.h>
@@ -15,14 +15,15 @@
 class WallClock {
 public:
 	WallClock();
-	void setup();
-	void handleTimerInterrupt();
+	void Setup();
+	void HandleTimerInterrupt();
 	void reset();
-	void run(WallClockTickable *tickable);
+	void Attach(WallClockListener *tickable);
+	void Detach();
 	void stop();
 private:
-	WallClockTickable *tickable;
-	uint16_t count;
+	WallClockListener *listener;
+	uint8_t count;
 };
 
 #endif /* WALLCLOCK_H_ */

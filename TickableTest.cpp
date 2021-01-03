@@ -17,7 +17,7 @@ void TickableTest::processClockTick() {
 
 void TickableTest::display(U8G2 *u8g2) {
 	u8g2->setFontMode(1);
-	u8g2->setFont(u8g2_font_helvR08_tf);
+	u8g2->setFont(u8g2_font_helvR08_tr);
 	u8g2->setCursor(1, 9);
 	u8g2->print(clock);
 }

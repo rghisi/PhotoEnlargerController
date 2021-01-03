@@ -6,11 +6,11 @@
  */
 
 #ifndef TICKABLETEST_H_
-#include "WallClockTickable.h"
+#include "peripheral/WallClockListener.h"
 #include "ui/Displayable.h"
 #define TICKABLETEST_H_
 
-class TickableTest : WallClockTickable, Displayable { // @suppress("Class has a virtual method and non-virtual destructor")
+class TickableTest : WallClockListener, Displayable { // @suppress("Class has a virtual method and non-virtual destructor")
 public:
 	TickableTest();
 	void processClockTick();

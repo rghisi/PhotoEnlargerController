@@ -16,4 +16,5 @@ project/peripheral/RGBLed.cpp.o: ../../peripheral/RGBLed.cpp \
  /home/ghisi/.arduinocdt/libraries/U8g2/2.28.10/src/U8x8lib.h \
  /home/ghisi/.arduinocdt/libraries/U8g2/2.28.10/src/clib/u8x8.h \
  /home/ghisi/.arduinocdt/libraries/U8g2/2.28.10/src/clib/u8g2.h \
- /home/ghisi/.arduinocdt/libraries/U8g2/2.28.10/src/clib/u8x8.h
+ /home/ghisi/.arduinocdt/libraries/U8g2/2.28.10/src/clib/u8x8.h \
+ ../../peripheral/SoftPWMOutput.h

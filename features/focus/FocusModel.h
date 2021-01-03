@@ -15,9 +15,14 @@ public:
 	FocusModel(RGBLed *rgbLed);
 	void toggleFocusLight();
 	uint8_t getState();
+	void setLightPower(uint8_t lightPower);
+	uint8_t getLightPower();
+
+	bool isLocked();
 private:
 	uint8_t state = LIGHT_OFF;
 	RGBLed *rgbLed;
+	uint8_t lightPower;
 	static const uint8_t LIGHT_OFF = 0;
 	static const uint8_t LIGHT_ON = 1;
 };

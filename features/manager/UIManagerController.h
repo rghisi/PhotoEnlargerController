@@ -15,10 +15,13 @@ class UIManagerController : public Controller {
 public:
 	UIManagerController(UIManagerModel* uiManagerModel, UIManagerView* view);
 	void handle(InputEvent controlEvent);
-	void readModel();
+	void OnActivate();
+	void OnDeactivate();
 private:
 	void selectPreviousUI();
 	void selectNextUI();
+	void SelectPreviousFeature();
+	void selectNextFeature();
 
 	UIManagerModel* model;
 	UIManagerView* view;

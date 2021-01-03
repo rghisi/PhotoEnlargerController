@@ -14,7 +14,7 @@ class Dial {
 public:
 	Dial(InputHandler *inputHandler);
 	void setup();
-	void handleInterrupt();
+	void poll();
 private:
 	void calculateDialIncrement();
 	InputHandler *inputHandler;

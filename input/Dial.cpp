@@ -27,11 +27,9 @@ void Dial::setup() {
 	inputPinValues = PINC & DIAL_PORT_MASK;
 	pushButtonValue = (inputPinValues >> PUSH_BUTTON_PORT) & 0x00000001b;
 	dialValue = (inputPinValues >> DIAL_B_PORT) & 0x00000011b;
-	PCICR |= _BV(PCIE1);
-	PCMSK1 |= _BV(PCINT13) | _BV(PCINT12) | _BV(PCINT11);
 }
 
-void Dial::handleInterrupt() {
+void Dial::poll() {
 	inputPinValues = PINC & DIAL_PORT_MASK;
 	newPushButtonValue = (inputPinValues >> PUSH_BUTTON_PORT) & 0x01;
 	newDialValue = (inputPinValues >> DIAL_A_PORT) & 0x03;

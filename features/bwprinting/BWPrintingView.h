@@ -7,13 +7,17 @@
 
 #ifndef UI_BWPRINTINGUI_H_
 #include "../../ui/View.h"
+#include "BWPrintingModel.h"
+#include "BWPrintingController.h"
 #include <stdio.h>
 #define UI_BWPRINTINGUI_H_
 
-class BWPrintingUI : public View { // @suppress("Class has a virtual method and non-virtual destructor")
+class BWPrintingView : public View { // @suppress("Class has a virtual method and non-virtual destructor")
 public:
-	BWPrintingUI();
+	BWPrintingView(BWPrintingModel* model, BWPrintingController* controller);
 	void display(U8G2 *u8g2);
+	const char* GetTitle();
+	bool isLocked();
 	void setRunning();
 	void setStopped();
 	void setPaused();
@@ -29,11 +33,19 @@ private:
 		greenExposure,
 		blueExposure
 	};
+
 	void highlightSelectedMode(U8G2 *u8g2);
+	void BWPrintingView::readModel();
+
 	HighlightedMode highlightedMode;
 	uint8_t highlightBoxY;
+	uint8_t stateIcon;
+	BWPrintingModel* model;
+	BWPrintingController* controller;
+
 	static const uint8_t PWM_BASE_RIGHT = 38;
 	static const uint8_t TEXT_BASE_RIGHT = 78;
+	static const char* title;
 };
 
 #endif /* UI_BWPRINTINGUI_H_ */

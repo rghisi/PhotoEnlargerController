@@ -9,6 +9,8 @@
 #define UI_MODEL_H_
 
 class Model {
+public:
+	virtual bool isLocked() = 0;
 
 };
 

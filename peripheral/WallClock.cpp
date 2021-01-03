@@ -8,14 +8,14 @@
 #include "WallClock.h"
 
 WallClock::WallClock() {
-	tickable = 0;
+	listener = 0;
 	count = 0;
 }
 
-void WallClock::setup() {
+void WallClock::Setup() {
 	TCCR1A = 0; // set entire TCCR1A register to 0
 	TCCR1B = 0; // same for TCCR1B
-	TCNT1  = 0; // initialize counter value to 0
+	TCNT1 = 0; // initialize counter value to 0
 	// set compare match register for 2000 Hz increments
 	OCR1A = 124; // = 16000000 / (64 * 2000) - 1 (must be <65536)
 	// turn on CTC mode
@@ -26,17 +26,22 @@ void WallClock::setup() {
 	TIMSK1 |= (1 << OCIE1A);
 }
 
-void WallClock::handleTimerInterrupt() {
-	count++;
-	if (count == 2000L) {
-		count = 0;
-		if (tickable != 0) {
-			tickable->processClockTick();
+void WallClock::HandleTimerInterrupt() {
+	if (listener) {
+		count++;
+		if (count == 200) {
+			count = 0;
+			listener->processClockTick();
 		}
 	}
 }
 
-void WallClock::run(WallClockTickable *tickable) {
-	this->tickable = tickable;
+void WallClock::Attach(WallClockListener *listener) {
+	count = 0;
+	this->listener = listener;
 }
 
+void WallClock::Detach() {
+	count = 0;
+	this->listener = 0;
+}

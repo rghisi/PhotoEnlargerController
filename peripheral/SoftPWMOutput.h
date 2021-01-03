@@ -19,11 +19,11 @@ public:
 	uint8_t getDutyCycle();
 
 private:
-	uint8_t counter;
+	volatile uint8_t counter;
 	volatile uint8_t *port;
-	uint8_t pin;
+	volatile uint8_t pin;
 	uint8_t pwmMax;
-	uint8_t dutyCycle;
+	volatile uint8_t dutyCycle;
 };
 
 #endif /* PERIPHERAL_SOFTPWMOUTPUT_H_ */

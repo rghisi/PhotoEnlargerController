@@ -5,32 +5,52 @@
  *      Author: ghisi
  */
 
-
 #include "../../features/manager/UIManagerController.h"
 
-UIManagerController::UIManagerController(UIManagerModel* model, UIManagerView* view) {
+UIManagerController::UIManagerController(UIManagerModel *model,
+		UIManagerView *view) {
 	this->model = model;
 	this->view = view;
+	model->getSelectedFeature()->controller->OnActivate();
 	view->setView(model->getSelectedFeature()->view);
 }
 
 void UIManagerController::handle(InputEvent controlEvent) {
 	switch (controlEvent) {
-		case InputEvent::padLeftReleased:
-			model->selectPreviousFeature();
-			view->setView(model->getSelectedFeature()->view);
-			break;
-		case InputEvent::padRightReleased:
-			model->selectNextFeature();
-			view->setView(model->getSelectedFeature()->view);
-			break;
-		default:
-			model->getSelectedFeature()->controller->handle(controlEvent);
-			break;
-		}
+	case InputEvent::padLeftReleased:
+		SelectPreviousFeature();
+		break;
+	case InputEvent::padRightReleased:
+		selectNextFeature();
+		break;
+	default:
+		model->getSelectedFeature()->controller->handle(controlEvent);
+		break;
+	}
 }
 
-void UIManagerController::readModel() {
-	model->getSelectedFeature()->controller->readModel();
+void UIManagerController::OnActivate() {
+	model->getSelectedFeature()->controller->OnActivate();
 }
 
+void UIManagerController::OnDeactivate() {
+	model->getSelectedFeature()->controller->OnDeactivate();
+}
+
+void UIManagerController::SelectPreviousFeature() {
+	if (!model->isLocked() && model->hasPreviousFeature()) {
+		OnDeactivate();
+		model->selectPreviousFeature();
+		OnActivate();
+		view->setView(model->getSelectedFeature()->view);
+	}
+}
+
+void UIManagerController::selectNextFeature() {
+	if (!model->isLocked() && model->hasNextFeature()) {
+		OnDeactivate();
+		model->selectNextFeature();
+		OnActivate();
+		view->setView(model->getSelectedFeature()->view);
+	}
+}

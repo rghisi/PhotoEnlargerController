@@ -11,10 +11,18 @@
 
 class UIManagerView : public View {
 public:
-	void display(U8G2 *u8g2);
+	UIManagerView();
 	void setView(View* view);
+
+	void display(U8G2 *u8g2);
+	const char* GetTitle();
+	bool isLocked();
+
 private:
+	void DrawFeatureTitle(U8G2 *u8g2);
 	View* delegateView;
+	uint8_t title_offset;
+	static const uint8_t lcdWidth = 128;
 };
 
 

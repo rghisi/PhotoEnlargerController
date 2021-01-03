@@ -19,7 +19,7 @@ static const uint8_t KeyPad::KEYPAD_VALUES[] = {
 KeyPad::KeyPad(InputHandler *inputHandler) {
 	this->inputHandler = inputHandler;
 	newKeypadValue = 0;
-	keypadValue = 0;
+	keypadValue = KEYPAD_REST_VALUE;
 	filteredAdcValue = 0;
 	adcEqualValuesCount = 0;
 	delta = 0;

@@ -10,7 +10,9 @@
 #define UI_VIEW_H_
 
 class View : public Displayable {
-
+public:
+	virtual const char* GetTitle() = 0;
+	virtual bool isLocked() = 0;
 };
 
 

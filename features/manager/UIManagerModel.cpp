@@ -7,7 +7,8 @@
 
 #include "../../features/manager/UIManagerModel.h"
 
-UIManagerModel::UIManagerModel(FeatureBundle *featureBundles, uint8_t numberOfFeatures) {
+UIManagerModel::UIManagerModel(FeatureBundle *featureBundles,
+		uint8_t numberOfFeatures) {
 	this->featureBundles = featureBundles;
 	this->numberOfFeatures = numberOfFeatures;
 	selectedFeatureIndex = FIRST;
@@ -15,20 +16,32 @@ UIManagerModel::UIManagerModel(FeatureBundle *featureBundles, uint8_t numberOfFe
 }
 
 void UIManagerModel::selectPreviousFeature() {
-	if (selectedFeatureIndex > FIRST) {
+	if (hasPreviousFeature()) {
 		selectedFeatureIndex--;
 		selectedFeature = &featureBundles[selectedFeatureIndex];
 	}
 }
 
 void UIManagerModel::selectNextFeature() {
-	if (selectedFeatureIndex < (numberOfFeatures - 1)) {
+	if (hasNextFeature()) {
 		selectedFeatureIndex++;
 		selectedFeature = &featureBundles[selectedFeatureIndex];
 	}
 }
 
+bool UIManagerModel::hasPreviousFeature() {
+	return selectedFeatureIndex > FIRST;
+}
+
+bool UIManagerModel::hasNextFeature() {
+	return selectedFeatureIndex < (numberOfFeatures - 1);
+}
+
 FeatureBundle* UIManagerModel::getSelectedFeature() {
 	return selectedFeature;
+}
+
+bool UIManagerModel::isLocked() {
+	return selectedFeature->model->isLocked();
 }
 

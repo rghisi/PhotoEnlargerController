@@ -14,8 +14,11 @@ class FocusView : public View {
 public:
 	FocusView(FocusModel* model);
 	void display(U8G2 *u8g2);
+	const char* GetTitle();
+	bool isLocked();
 private:
 	FocusModel* model;
+	static const char* title;
 };
 
 

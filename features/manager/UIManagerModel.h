@@ -13,7 +13,12 @@ public:
 	UIManagerModel(FeatureBundle* featureBundles, uint8_t numberOfFeatures);
 	void selectPreviousFeature();
 	void selectNextFeature();
+	bool hasPreviousFeature();
+	bool hasNextFeature();
 	FeatureBundle* getSelectedFeature();
+
+	bool isLocked();
+
 private:
 	uint8_t selectedFeatureIndex;
 	uint8_t numberOfFeatures;

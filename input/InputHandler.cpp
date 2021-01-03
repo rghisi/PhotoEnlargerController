@@ -28,7 +28,7 @@ void InputHandler::notify(InputEvent controlEvent) {
 
 void InputHandler::display(U8G2 *u8g2) {
 	u8g2->setFontMode(1);
-	u8g2->setFont(u8g2_font_helvR08_tf);
+	u8g2->setFont(u8g2_font_helvR08_tr);
 	u8g2->setCursor(25, 9);
 	u8g2->print((int)lastInputEvent);
 }

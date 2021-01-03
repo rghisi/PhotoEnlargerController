@@ -12,22 +12,27 @@ endif
 PROJECT_OBJS = \
 	project/PhotoEnlargerController.cpp.o \
 	project/TickableTest.cpp.o \
-	project/WallClock.cpp.o \
-	project/features/bwprinting/BWPrinting.cpp.o \
-	project/features/bwprinting/BWPrintingControl.cpp.o \
-	project/features/bwprinting/BWPrintingUI.cpp.o \
+	project/features/bwprinting/BWPrintingController.cpp.o \
+	project/features/bwprinting/BWPrintingModel.cpp.o \
+	project/features/bwprinting/BWPrintingView.cpp.o \
 	project/features/focus/FocusController.cpp.o \
 	project/features/focus/FocusModel.cpp.o \
 	project/features/focus/FocusView.cpp.o \
+	project/features/lcd-config/LCDConfigController.cpp.o \
+	project/features/lcd-config/LCDConfigModel.cpp.o \
+	project/features/lcd-config/LCDConfigView.cpp.o \
 	project/features/manager/UIManagerController.cpp.o \
 	project/features/manager/UIManagerModel.cpp.o \
 	project/features/manager/UIManagerView.cpp.o \
 	project/input/Dial.cpp.o \
 	project/input/InputHandler.cpp.o \
 	project/input/KeyPad.cpp.o \
+	project/peripheral/Configurations.cpp.o \
+	project/peripheral/LCD.cpp.o \
 	project/peripheral/RGBLed.cpp.o \
 	project/peripheral/SoftPWM.cpp.o \
 	project/peripheral/SoftPWMOutput.cpp.o \
+	project/peripheral/WallClock.cpp.o \
 
 PLATFORM_CORE_OBJS = \
 	core/PluggableUSB.cpp.o \
@@ -204,37 +209,29 @@ project/TickableTest.cpp.d: ;
 
 -include project/TickableTest.cpp.d 
 
-project/WallClock.cpp.o: ../../WallClock.cpp project/WallClock.cpp.d
+project/features/bwprinting/BWPrintingController.cpp.o: ../../features/bwprinting/BWPrintingController.cpp project/features/bwprinting/BWPrintingController.cpp.d
 	@$(call mymkdir,$(dir $@))
 	"/home/ghisi/.arduinocdt/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -Wno-error=narrowing -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_DUEMILANOVE -DARDUINO_ARCH_AVR   -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/cores/arduino" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/variants/standard" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/Wire/src" -I"/home/ghisi/.arduinocdt/libraries/U8g2/2.28.10/src" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/EEPROM/src" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/SPI/src" "$<" -o "$@"
 
-project/WallClock.cpp.d: ;
+project/features/bwprinting/BWPrintingController.cpp.d: ;
 
--include project/WallClock.cpp.d 
+-include project/features/bwprinting/BWPrintingController.cpp.d 
 
-project/features/bwprinting/BWPrinting.cpp.o: ../../features/bwprinting/BWPrinting.cpp project/features/bwprinting/BWPrinting.cpp.d
+project/features/bwprinting/BWPrintingModel.cpp.o: ../../features/bwprinting/BWPrintingModel.cpp project/features/bwprinting/BWPrintingModel.cpp.d
 	@$(call mymkdir,$(dir $@))
 	"/home/ghisi/.arduinocdt/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -Wno-error=narrowing -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_DUEMILANOVE -DARDUINO_ARCH_AVR   -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/cores/arduino" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/variants/standard" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/Wire/src" -I"/home/ghisi/.arduinocdt/libraries/U8g2/2.28.10/src" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/EEPROM/src" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/SPI/src" "$<" -o "$@"
 
-project/features/bwprinting/BWPrinting.cpp.d: ;
+project/features/bwprinting/BWPrintingModel.cpp.d: ;
 
--include project/features/bwprinting/BWPrinting.cpp.d 
+-include project/features/bwprinting/BWPrintingModel.cpp.d 
 
-project/features/bwprinting/BWPrintingControl.cpp.o: ../../features/bwprinting/BWPrintingControl.cpp project/features/bwprinting/BWPrintingControl.cpp.d
+project/features/bwprinting/BWPrintingView.cpp.o: ../../features/bwprinting/BWPrintingView.cpp project/features/bwprinting/BWPrintingView.cpp.d
 	@$(call mymkdir,$(dir $@))
 	"/home/ghisi/.arduinocdt/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -Wno-error=narrowing -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_DUEMILANOVE -DARDUINO_ARCH_AVR   -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/cores/arduino" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/variants/standard" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/Wire/src" -I"/home/ghisi/.arduinocdt/libraries/U8g2/2.28.10/src" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/EEPROM/src" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/SPI/src" "$<" -o "$@"
 
-project/features/bwprinting/BWPrintingControl.cpp.d: ;
+project/features/bwprinting/BWPrintingView.cpp.d: ;
 
--include project/features/bwprinting/BWPrintingControl.cpp.d 
-
-project/features/bwprinting/BWPrintingUI.cpp.o: ../../features/bwprinting/BWPrintingUI.cpp project/features/bwprinting/BWPrintingUI.cpp.d
-	@$(call mymkdir,$(dir $@))
-	"/home/ghisi/.arduinocdt/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -Wno-error=narrowing -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_DUEMILANOVE -DARDUINO_ARCH_AVR   -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/cores/arduino" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/variants/standard" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/Wire/src" -I"/home/ghisi/.arduinocdt/libraries/U8g2/2.28.10/src" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/EEPROM/src" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/SPI/src" "$<" -o "$@"
-
-project/features/bwprinting/BWPrintingUI.cpp.d: ;
-
--include project/features/bwprinting/BWPrintingUI.cpp.d 
+-include project/features/bwprinting/BWPrintingView.cpp.d 
 
 project/features/focus/FocusController.cpp.o: ../../features/focus/FocusController.cpp project/features/focus/FocusController.cpp.d
 	@$(call mymkdir,$(dir $@))
@@ -259,6 +256,30 @@ project/features/focus/FocusView.cpp.o: ../../features/focus/FocusView.cpp proje
 project/features/focus/FocusView.cpp.d: ;
 
 -include project/features/focus/FocusView.cpp.d 
+
+project/features/lcd-config/LCDConfigController.cpp.o: ../../features/lcd-config/LCDConfigController.cpp project/features/lcd-config/LCDConfigController.cpp.d
+	@$(call mymkdir,$(dir $@))
+	"/home/ghisi/.arduinocdt/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -Wno-error=narrowing -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_DUEMILANOVE -DARDUINO_ARCH_AVR   -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/cores/arduino" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/variants/standard" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/Wire/src" -I"/home/ghisi/.arduinocdt/libraries/U8g2/2.28.10/src" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/EEPROM/src" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/SPI/src" "$<" -o "$@"
+
+project/features/lcd-config/LCDConfigController.cpp.d: ;
+
+-include project/features/lcd-config/LCDConfigController.cpp.d 
+
+project/features/lcd-config/LCDConfigModel.cpp.o: ../../features/lcd-config/LCDConfigModel.cpp project/features/lcd-config/LCDConfigModel.cpp.d
+	@$(call mymkdir,$(dir $@))
+	"/home/ghisi/.arduinocdt/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -Wno-error=narrowing -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_DUEMILANOVE -DARDUINO_ARCH_AVR   -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/cores/arduino" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/variants/standard" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/Wire/src" -I"/home/ghisi/.arduinocdt/libraries/U8g2/2.28.10/src" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/EEPROM/src" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/SPI/src" "$<" -o "$@"
+
+project/features/lcd-config/LCDConfigModel.cpp.d: ;
+
+-include project/features/lcd-config/LCDConfigModel.cpp.d 
+
+project/features/lcd-config/LCDConfigView.cpp.o: ../../features/lcd-config/LCDConfigView.cpp project/features/lcd-config/LCDConfigView.cpp.d
+	@$(call mymkdir,$(dir $@))
+	"/home/ghisi/.arduinocdt/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -Wno-error=narrowing -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_DUEMILANOVE -DARDUINO_ARCH_AVR   -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/cores/arduino" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/variants/standard" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/Wire/src" -I"/home/ghisi/.arduinocdt/libraries/U8g2/2.28.10/src" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/EEPROM/src" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/SPI/src" "$<" -o "$@"
+
+project/features/lcd-config/LCDConfigView.cpp.d: ;
+
+-include project/features/lcd-config/LCDConfigView.cpp.d 
 
 project/features/manager/UIManagerController.cpp.o: ../../features/manager/UIManagerController.cpp project/features/manager/UIManagerController.cpp.d
 	@$(call mymkdir,$(dir $@))
@@ -308,6 +329,22 @@ project/input/KeyPad.cpp.d: ;
 
 -include project/input/KeyPad.cpp.d 
 
+project/peripheral/Configurations.cpp.o: ../../peripheral/Configurations.cpp project/peripheral/Configurations.cpp.d
+	@$(call mymkdir,$(dir $@))
+	"/home/ghisi/.arduinocdt/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -Wno-error=narrowing -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_DUEMILANOVE -DARDUINO_ARCH_AVR   -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/cores/arduino" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/variants/standard" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/Wire/src" -I"/home/ghisi/.arduinocdt/libraries/U8g2/2.28.10/src" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/EEPROM/src" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/SPI/src" "$<" -o "$@"
+
+project/peripheral/Configurations.cpp.d: ;
+
+-include project/peripheral/Configurations.cpp.d 
+
+project/peripheral/LCD.cpp.o: ../../peripheral/LCD.cpp project/peripheral/LCD.cpp.d
+	@$(call mymkdir,$(dir $@))
+	"/home/ghisi/.arduinocdt/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -Wno-error=narrowing -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_DUEMILANOVE -DARDUINO_ARCH_AVR   -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/cores/arduino" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/variants/standard" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/Wire/src" -I"/home/ghisi/.arduinocdt/libraries/U8g2/2.28.10/src" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/EEPROM/src" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/SPI/src" "$<" -o "$@"
+
+project/peripheral/LCD.cpp.d: ;
+
+-include project/peripheral/LCD.cpp.d 
+
 project/peripheral/RGBLed.cpp.o: ../../peripheral/RGBLed.cpp project/peripheral/RGBLed.cpp.d
 	@$(call mymkdir,$(dir $@))
 	"/home/ghisi/.arduinocdt/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -Wno-error=narrowing -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_DUEMILANOVE -DARDUINO_ARCH_AVR   -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/cores/arduino" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/variants/standard" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/Wire/src" -I"/home/ghisi/.arduinocdt/libraries/U8g2/2.28.10/src" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/EEPROM/src" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/SPI/src" "$<" -o "$@"
@@ -331,6 +368,14 @@ project/peripheral/SoftPWMOutput.cpp.o: ../../peripheral/SoftPWMOutput.cpp proje
 project/peripheral/SoftPWMOutput.cpp.d: ;
 
 -include project/peripheral/SoftPWMOutput.cpp.d 
+
+project/peripheral/WallClock.cpp.o: ../../peripheral/WallClock.cpp project/peripheral/WallClock.cpp.d
+	@$(call mymkdir,$(dir $@))
+	"/home/ghisi/.arduinocdt/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++" -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -Wno-error=narrowing -MMD -flto -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10608 -DARDUINO_AVR_DUEMILANOVE -DARDUINO_ARCH_AVR   -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/cores/arduino" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/variants/standard" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/Wire/src" -I"/home/ghisi/.arduinocdt/libraries/U8g2/2.28.10/src" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/EEPROM/src" -I"/home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/libraries/SPI/src" "$<" -o "$@"
+
+project/peripheral/WallClock.cpp.d: ;
+
+-include project/peripheral/WallClock.cpp.d 
 
 
 core/PluggableUSB.cpp.o: /home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/cores/arduino/PluggableUSB.cpp core/PluggableUSB.cpp.d

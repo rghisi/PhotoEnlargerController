@@ -11,7 +11,9 @@
 
 class Controller : public InputEventListener {
 public:
-	virtual void readModel();
+	virtual void OnActivate();
+	virtual void OnDeactivate();
+
 };
 
 

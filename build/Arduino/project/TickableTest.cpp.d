@@ -1,5 +1,5 @@
 project/TickableTest.cpp.o: ../../TickableTest.cpp ../../TickableTest.h \
- ../../WallClockTickable.h ../../ui/Displayable.h \
+ ../../peripheral/WallClockListener.h ../../ui/Displayable.h \
  /home/ghisi/.arduinocdt/libraries/U8g2/2.28.10/src/U8g2lib.h \
  /home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/cores/arduino/Arduino.h \
  /home/ghisi/.arduinocdt/packages/arduino/hardware/avr/1.8.3/cores/arduino/binary.h \

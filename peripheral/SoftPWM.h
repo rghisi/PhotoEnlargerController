@@ -13,20 +13,13 @@
 class SoftPWM {
 
 public:
-//	struct Output {
-//		volatile uint8_t *port;
-//		uint8_t pin;
-//		uint8_t pwmMax;
-//		uint8_t counter;
-//		uint8_t dutyCycle;
-//	};
-	SoftPWM(SoftPWMOutput *softPwmOutputs, uint8_t numberOfOutputs);
+	SoftPWM(SoftPWMOutput softPwmOutputs[], uint8_t numberOfOutputs);
 	void setup();
 	void handleTimerInterrupt();
 private:
 	void configureTimer();
 	void configureOutputs();
-	SoftPWMOutput *softPwmOutputs;
+	SoftPWMOutput* softPwmOutputs;
 	uint8_t numberOfOutputs;
 };
 
