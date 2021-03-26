@@ -14,16 +14,19 @@
 
 class WallClock {
 public:
+	enum State { running, stopped };
 	WallClock();
 	void Setup();
 	void HandleTimerInterrupt();
-	void reset();
 	void Attach(WallClockListener *tickable);
 	void Detach();
-	void stop();
+	void Run();
+	void Stop();
+	void Reset();
 private:
 	WallClockListener *listener;
 	uint8_t count;
+	State state;
 };
 
 #endif /* WALLCLOCK_H_ */

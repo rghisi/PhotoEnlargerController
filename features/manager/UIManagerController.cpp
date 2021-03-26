@@ -11,7 +11,6 @@ UIManagerController::UIManagerController(UIManagerModel *model,
 		UIManagerView *view) {
 	this->model = model;
 	this->view = view;
-	model->getSelectedFeature()->controller->OnActivate();
 	view->setView(model->getSelectedFeature()->view);
 }
 
@@ -29,28 +28,14 @@ void UIManagerController::handle(InputEvent controlEvent) {
 	}
 }
 
-void UIManagerController::OnActivate() {
-	model->getSelectedFeature()->controller->OnActivate();
-}
-
-void UIManagerController::OnDeactivate() {
-	model->getSelectedFeature()->controller->OnDeactivate();
-}
-
 void UIManagerController::SelectPreviousFeature() {
-	if (!model->isLocked() && model->hasPreviousFeature()) {
-		OnDeactivate();
-		model->selectPreviousFeature();
-		OnActivate();
+	if (model->SelectPreviousFeature()) {
 		view->setView(model->getSelectedFeature()->view);
 	}
 }
 
 void UIManagerController::selectNextFeature() {
-	if (!model->isLocked() && model->hasNextFeature()) {
-		OnDeactivate();
-		model->selectNextFeature();
-		OnActivate();
+  if (model->SelectNextFeature()) {
 		view->setView(model->getSelectedFeature()->view);
 	}
 }

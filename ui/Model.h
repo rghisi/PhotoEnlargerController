@@ -11,7 +11,8 @@
 class Model {
 public:
 	virtual bool isLocked() = 0;
-
+	virtual void OnActivate();
+	virtual void OnDeactivate();
 };
 
 

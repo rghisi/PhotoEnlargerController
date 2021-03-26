@@ -13,17 +13,18 @@ class SoftPWMOutput {
 
 public:
 	SoftPWMOutput(volatile uint8_t *port, uint8_t pin, uint8_t pwmMax);
-	void processCycle();
-	void configure();
-	void setDutyCycle(uint8_t dutyCycle);
-	uint8_t getDutyCycle();
+	void ProcessCycle();
+	void Configure();
+	void SetDutyCycle(uint8_t dutyCycle);
+	uint8_t GetDutyCycle();
+	uint8_t GetPwmMax();
 
 private:
 	volatile uint8_t counter;
 	volatile uint8_t *port;
 	volatile uint8_t pin;
 	uint8_t pwmMax;
-	volatile uint8_t dutyCycle;
+	volatile uint8_t duty_cycle;
 };
 
 #endif /* PERIPHERAL_SOFTPWMOUTPUT_H_ */

@@ -9,7 +9,7 @@
 //Full - 4 ticks per click
 //static const int8_t Dial::QUADRATURE_TABLE[] = { 0, -1, 1, 0, 1, 0, 0, -1, -1, 0, 0, 1, 0, 1, -1 };
 //Partial - 1 tick per click
-static const int8_t Dial::QUADRATURE_TABLE[] = { 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0 };
+static const int8_t Dial::QUADRATURE_TABLE[] = { 0,  0, 0, 0, 0, 0, 0, -1,  0, 0, 0, 1, 0, 0,  0 };
 
 Dial::Dial(InputHandler *inputHandler) {
 	this->inputHandler = inputHandler;
@@ -37,9 +37,9 @@ void Dial::poll() {
 	if (newDialValue != dialValue) {
 		calculateDialIncrement();
 		if (dialIncrement == 1) {
-			inputHandler->notify(InputEvent::dialPlus);
+			inputHandler->Enqueue(InputEvent::dialPlus);
 		} else if (dialIncrement == -1) {
-			inputHandler->notify(InputEvent::dialMinus);
+			inputHandler->Enqueue(InputEvent::dialMinus);
 		}
 	}
 
@@ -47,9 +47,9 @@ void Dial::poll() {
 	if (pushButtonValue != newPushButtonValue) {
 		pushButtonValue = newPushButtonValue;
 		if (pushButtonValue == 1) {
-			inputHandler->notify(InputEvent::dialPushButtonReleased);
+			inputHandler->Enqueue(InputEvent::dialPushButtonReleased);
 		} else {
-			inputHandler->notify(InputEvent::dialPushButtonPressed);
+			inputHandler->Enqueue(InputEvent::dialPushButtonPressed);
 		}
 	}
 }

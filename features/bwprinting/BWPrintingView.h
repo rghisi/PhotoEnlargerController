@@ -21,31 +21,34 @@ public:
 	void setRunning();
 	void setStopped();
 	void setPaused();
-	void highlightTotalExposure();
-	void highlightGreenExposure();
-	void highlightBlueExposure();
 	uint8_t totalExposureTime;
 	uint8_t blueExposureTime;
 	uint8_t greenExposureTime;
 private:
-	enum HighlightedMode {
-		totalExposure,
-		greenExposure,
-		blueExposure
-	};
-
-	void highlightSelectedMode(U8G2 *u8g2);
 	void BWPrintingView::readModel();
 
-	HighlightedMode highlightedMode;
-	uint8_t highlightBoxY;
-	uint8_t stateIcon;
+	uint8_t highlight_box_x;
+	uint8_t highlight_box_y;
+	uint8_t highlight_box_width;
+	uint8_t state_icon;
 	BWPrintingModel* model;
 	BWPrintingController* controller;
 
-	static const uint8_t PWM_BASE_RIGHT = 38;
-	static const uint8_t TEXT_BASE_RIGHT = 78;
 	static const char* title;
+	static const uint8_t pwmBaseRight = 37;
+	static const uint8_t textBaseRight = 79;
+	static const uint8_t highlightBoxHeight = 16;
+	static const uint8_t powerBoxX = pwmBaseRight - 2;
+	static const uint8_t powerBoxWidth = 44;
+	static const uint8_t textBoxX = textBaseRight - 2;
+	static const uint8_t textBoxWidth = 49;
+
+	static const uint8_t lineOneBoxY = 16;
+	static const uint8_t lineTwoBoxY = 32;
+	static const uint8_t lineThreeBoxY = 48;
+	static const uint8_t lineOneBaseTop = 30;
+	static const uint8_t lineTwoBaseTop = 46;
+	static const uint8_t lineThreeBaseTop = 62;
 };
 
 #endif /* UI_BWPRINTINGUI_H_ */

@@ -15,15 +15,8 @@ class FocusController : public Controller {
 public:
 	FocusController(FocusModel* model);
 	void handle(InputEvent controlEvent);
-	void OnActivate();
-	void OnDeactivate();
 
 private:
-	void increaseLightPower();
-	void decreaseLightPower();
-
-	uint8_t state = 0;
-	uint8_t lightPower = 80;
 	FocusModel* model;
 };
 

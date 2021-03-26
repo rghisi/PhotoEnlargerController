@@ -13,20 +13,29 @@ UIManagerModel::UIManagerModel(FeatureBundle *featureBundles,
 	this->numberOfFeatures = numberOfFeatures;
 	selectedFeatureIndex = FIRST;
 	selectedFeature = &featureBundles[selectedFeatureIndex];
+	OnDeactivate();
 }
 
-void UIManagerModel::selectPreviousFeature() {
-	if (hasPreviousFeature()) {
+bool UIManagerModel::SelectPreviousFeature() {
+	if (!isLocked() && hasPreviousFeature()) {
+	  OnDeactivate();
 		selectedFeatureIndex--;
 		selectedFeature = &featureBundles[selectedFeatureIndex];
+		OnActivate();
+		return true;
 	}
+	return false;
 }
 
-void UIManagerModel::selectNextFeature() {
-	if (hasNextFeature()) {
+bool UIManagerModel::SelectNextFeature() {
+	if (!isLocked() && hasNextFeature()) {
+	  OnDeactivate();
 		selectedFeatureIndex++;
 		selectedFeature = &featureBundles[selectedFeatureIndex];
+		OnActivate();
+		return true;
 	}
+	return false;
 }
 
 bool UIManagerModel::hasPreviousFeature() {
@@ -45,3 +54,10 @@ bool UIManagerModel::isLocked() {
 	return selectedFeature->model->isLocked();
 }
 
+void UIManagerModel::OnActivate() {
+  selectedFeature->model->OnActivate();
+}
+
+void UIManagerModel::OnDeactivate() {
+  selectedFeature->model->OnDeactivate();
+}

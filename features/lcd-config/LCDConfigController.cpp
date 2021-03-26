@@ -22,12 +22,4 @@ void LCDConfigController::handle(InputEvent controlEvent) {
 		}
 }
 
-void LCDConfigController::OnActivate() {
-
-}
-
-void LCDConfigController::OnDeactivate() {
-	model->SaveBrightness();
-}
-
 

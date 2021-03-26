@@ -30,3 +30,11 @@ uint8_t LCDConfigModel::GetBrightness() {
 void LCDConfigModel::SaveBrightness() {
 	lcd->SaveBrightness();
 }
+
+void LCDConfigModel::OnActivate() {
+
+}
+
+void LCDConfigModel::OnDeactivate() {
+  SaveBrightness();
+}

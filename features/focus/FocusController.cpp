@@ -14,35 +14,13 @@ FocusController::FocusController(FocusModel *model) {
 void FocusController::handle(InputEvent controlEvent) {
 	switch (controlEvent) {
 	case InputEvent::padEnterReleased:
-		model->toggleFocusLight();
+		model->ToggleFocusLight();
 		break;
 	case InputEvent::dialPlus:
-		increaseLightPower();
+		model->IncreaseLightPower();
 		break;
 	case InputEvent::dialMinus:
-		decreaseLightPower();
+		model->DecreaseLightPower();
 		break;
 	}
-}
-
-void FocusController::increaseLightPower() {
-	if (lightPower < 100) {
-		lightPower++;
-		model->setLightPower(lightPower);
-	}
-}
-
-void FocusController::decreaseLightPower() {
-	if (lightPower > 0) {
-		lightPower--;
-		model->setLightPower(lightPower);
-	}
-}
-
-void FocusController::OnActivate() {
-
-}
-
-void FocusController::OnDeactivate() {
-
 }

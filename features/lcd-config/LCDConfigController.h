@@ -14,8 +14,6 @@ class LCDConfigController: public Controller {
 public:
 	LCDConfigController(LCDConfigModel* model);
 	void handle(InputEvent controlEvent);
-	void OnActivate();
-	void OnDeactivate();
 
 private:
 	LCDConfigModel* model;

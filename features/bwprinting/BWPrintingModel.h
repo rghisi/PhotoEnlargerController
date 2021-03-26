@@ -15,38 +15,42 @@
 
 class BWPrintingModel: WallClockListener, public Model { // @suppress("Class has a virtual method and non-virtual destructor")
 public:
-	BWPrintingModel(RGBLed* rgb_led, WallClock* wall_clock);
+	BWPrintingModel(RGBLed *rgb_led, WallClock *wall_clock);
 	enum State {
 		running, stopped, paused, starting
 	};
 	bool isLocked();
-	void start();
-	void stop();
-	void pause();
-	uint8_t getGreenExposureTime();
-	void setGreenExposure(uint8_t seconds);
-	uint8_t getBlueExposureTime();
-	void setBlueExposure(uint8_t seconds);
-	uint8_t getTotalExposureTime();
-	uint8_t getTotalElapsedExposureTime();
-	uint8_t getGreenRemainingExposureTime();
-	uint8_t getBlueRemainingExposureTime();
-	uint8_t getTotalRemainingExposureTime();
-	uint8_t getRedPower();
-	uint8_t getGreenPower();
-	uint8_t getBluePower();
+	void OnActivate();
+  void OnDeactivate();
+	void Start();
+	void Stop();
+	void Pause();
+	void Resume();
+	uint8_t GetGreenExposureTime();
+	void SetGreenExposure(uint8_t seconds);
+	uint8_t GetBlueExposureTime();
+	void SetBlueExposure(uint8_t seconds);
+	uint8_t GetTotalExposureTime();
+	uint8_t GetTotalElapsedExposureTime();
+	uint8_t GetGreenRemainingExposureTime();
+	uint8_t GetBlueRemainingExposureTime();
+	uint8_t GetTotalRemainingExposureTime();
+	uint8_t GetRedPower();
+	void SetRedPower(uint8_t power);
+	uint8_t GetGreenPower();
+	void SetGreenPower(uint8_t power);
+	uint8_t GetBluePower();
+	void SetBluePower(uint8_t power);
 
 	void processClockTick();
 	State getState();
 
 private:
 	void calculateTotalExposureTime();
-	RGBLed* rgb_led;
-	WallClock* wall_clock;
+	void TurnOnExposureLights();
+	RGBLed *rgb_led;
+	WallClock *wall_clock;
 	State state;
-	uint8_t red_power;
-	uint8_t green_power;
-	uint8_t blue_power;
 	uint8_t total_exposure_time;
 	uint8_t total_remaining_exposure_time;
 	uint8_t green_exposure_time;

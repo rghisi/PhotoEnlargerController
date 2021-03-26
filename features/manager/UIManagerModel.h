@@ -11,15 +11,17 @@
 class UIManagerModel : public Model {
 public:
 	UIManagerModel(FeatureBundle* featureBundles, uint8_t numberOfFeatures);
-	void selectPreviousFeature();
-	void selectNextFeature();
-	bool hasPreviousFeature();
-	bool hasNextFeature();
+	bool SelectPreviousFeature();
+	bool SelectNextFeature();
 	FeatureBundle* getSelectedFeature();
 
 	bool isLocked();
+	void OnActivate();
+	void OnDeactivate();
 
 private:
+	bool hasPreviousFeature();
+	bool hasNextFeature();
 	uint8_t selectedFeatureIndex;
 	uint8_t numberOfFeatures;
 	FeatureBundle* featureBundles;

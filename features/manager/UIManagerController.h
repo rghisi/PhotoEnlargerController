@@ -15,8 +15,6 @@ class UIManagerController : public Controller {
 public:
 	UIManagerController(UIManagerModel* uiManagerModel, UIManagerView* view);
 	void handle(InputEvent controlEvent);
-	void OnActivate();
-	void OnDeactivate();
 private:
 	void selectPreviousUI();
 	void selectNextUI();

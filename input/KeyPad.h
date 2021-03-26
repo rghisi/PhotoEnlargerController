@@ -16,7 +16,7 @@ class KeyPad {
 public:
 	KeyPad(InputHandler *inputHandler);
 	void setup();
-	void handleADCInterrupt();
+	void poll();
 	int8_t delta;
 	uint8_t pass;
 private:
@@ -27,13 +27,14 @@ private:
 	uint8_t filteredAdcValue;
 	uint8_t adcEqualValuesCount;
 	InputHandler *inputHandler;
-	static const uint8_t KEYPAD_UP_VALUE = 7;
-	static const uint8_t KEYPAD_DOWN_VALUE = 21;
+	static const uint8_t KEYPAD_UP_VALUE = 21;
+	static const uint8_t KEYPAD_DOWN_VALUE = 7;
 	static const uint8_t KEYPAD_LEFT_VALUE = 41;
 	static const uint8_t KEYPAD_RIGHT_VALUE = 0;
 	static const uint8_t KEYPAD_ENTER_VALUE = 88;
 	static const uint8_t KEYPAD_REST_VALUE = 127; //Real value is 255 but we are using only the 7 least significant bits
 	static const uint8_t KEYPAD_VALUES[];
+	static const uint8_t FILTER_SIZE = 10;
 	static const int8_t ACCEPTABLE_DELTA = 2;
 
 };

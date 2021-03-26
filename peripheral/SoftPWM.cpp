@@ -20,7 +20,7 @@ void SoftPWM::setup() {
 
 void SoftPWM::handleTimerInterrupt() {
 	for (uint8_t i = 0; i < numberOfOutputs; i++) {
-		softPwmOutputs[i].processCycle();
+		softPwmOutputs[i].ProcessCycle();
 	}
 }
 
@@ -37,6 +37,6 @@ void SoftPWM::configureTimer() {
 
 void SoftPWM::configureOutputs() {
 	for (uint8_t i = 0; i < numberOfOutputs; i++) {
-		softPwmOutputs[i].configure();
+		softPwmOutputs[i].Configure();
 	}
 }

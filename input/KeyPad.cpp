@@ -28,52 +28,52 @@ KeyPad::KeyPad(InputHandler *inputHandler) {
 
 void KeyPad::setup() {
 	DDRC &= !_BV(DDC1);
-
-	ADMUX = _BV(REFS0) | _BV(ADLAR);
-	ADCSRA = _BV(
-			ADEN) | _BV(ADSC) | _BV(ADATE) | _BV(ADIE) | _BV(ADPS2) | _BV(ADPS1)
-			| _BV(ADPS0);
+	ADMUX = _BV(REFS0) | _BV(ADLAR);	//AVCC Reference + Left adjust result
+	ADCSRA =
+			_BV(ADEN) |		//Enable ADC
+			_BV(ADSC) |		//Start conversion
+			_BV(ADATE) |	//Auto Trigger
+			_BV(ADPS2) | _BV(ADPS1) | _BV(ADPS0); //Set prescaler to 128 (max)
 }
 
-void KeyPad::handleADCInterrupt() {
-	newKeypadValue = getFilteredADCValue(ADCH & 0x7F);
+void KeyPad::poll() {
+	newKeypadValue = getFilteredADCValue(getNormalizedValue(ADCH & 0x7F));
 	if (keypadValue != newKeypadValue) {
-		newKeypadValue = getNormalizedValue(newKeypadValue);
 		pass = newKeypadValue;
 		if (keypadValue == KEYPAD_REST_VALUE) {
 			switch (newKeypadValue) {
 			case KEYPAD_UP_VALUE:
-				inputHandler->notify(InputEvent::padUpPressed);
+				inputHandler->Enqueue(InputEvent::padUpPressed);
 				break;
 			case KEYPAD_DOWN_VALUE:
-				inputHandler->notify(InputEvent::padDownPressed);
+				inputHandler->Enqueue(InputEvent::padDownPressed);
 				break;
 			case KEYPAD_LEFT_VALUE:
-				inputHandler->notify(InputEvent::padLeftPressed);
+				inputHandler->Enqueue(InputEvent::padLeftPressed);
 				break;
 			case KEYPAD_RIGHT_VALUE:
-				inputHandler->notify(InputEvent::padRightPressed);
+				inputHandler->Enqueue(InputEvent::padRightPressed);
 				break;
 			case KEYPAD_ENTER_VALUE:
-				inputHandler->notify(InputEvent::padEnterPressed);
+				inputHandler->Enqueue(InputEvent::padEnterPressed);
 				break;
 			}
 		} else {
 			switch (keypadValue) {
 			case KEYPAD_UP_VALUE:
-				inputHandler->notify(InputEvent::padUpReleased);
+				inputHandler->Enqueue(InputEvent::padUpReleased);
 				break;
 			case KEYPAD_DOWN_VALUE:
-				inputHandler->notify(InputEvent::padDownReleased);
+				inputHandler->Enqueue(InputEvent::padDownReleased);
 				break;
 			case KEYPAD_LEFT_VALUE:
-				inputHandler->notify(InputEvent::padLeftReleased);
+				inputHandler->Enqueue(InputEvent::padLeftReleased);
 				break;
 			case KEYPAD_RIGHT_VALUE:
-				inputHandler->notify(InputEvent::padRightReleased);
+				inputHandler->Enqueue(InputEvent::padRightReleased);
 				break;
 			case KEYPAD_ENTER_VALUE:
-				inputHandler->notify(InputEvent::padEnterReleased);
+				inputHandler->Enqueue(InputEvent::padEnterReleased);
 				break;
 			}
 		}
@@ -81,17 +81,18 @@ void KeyPad::handleADCInterrupt() {
 	}
 }
 
-uint8_t KeyPad::getFilteredADCValue(uint8_t adcValue) {
-	delta = filteredAdcValue - adcValue;
-	if (delta <= ACCEPTABLE_DELTA && delta >= -ACCEPTABLE_DELTA) {
-		adcEqualValuesCount++;
-	} else {
-		filteredAdcValue = adcValue;
+uint8_t KeyPad::getFilteredADCValue(uint8_t value) {
+	if (value != filteredAdcValue) {
+		filteredAdcValue = value;
 		adcEqualValuesCount = 0;
 	}
-	if (adcEqualValuesCount == 5) {
+
+	adcEqualValuesCount++;
+
+	if (adcEqualValuesCount == FILTER_SIZE) {
 		return filteredAdcValue;
 	}
+
 	return keypadValue;
 }
 

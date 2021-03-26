@@ -10,14 +10,15 @@
 WallClock::WallClock() {
 	listener = 0;
 	count = 0;
+	state = State::stopped;
 }
 
 void WallClock::Setup() {
 	TCCR1A = 0; // set entire TCCR1A register to 0
 	TCCR1B = 0; // same for TCCR1B
 	TCNT1 = 0; // initialize counter value to 0
-	// set compare match register for 2000 Hz increments
-	OCR1A = 124; // = 16000000 / (64 * 2000) - 1 (must be <65536)
+	// set compare match register for 1000 Hz increments
+	OCR1A = 249;
 	// turn on CTC mode
 	TCCR1B |= (1 << WGM12);
 	// Set CS12, CS11 and CS10 bits for 64 prescaler
@@ -27,9 +28,9 @@ void WallClock::Setup() {
 }
 
 void WallClock::HandleTimerInterrupt() {
-	if (listener) {
+	if (state == State::running && listener) {
 		count++;
-		if (count == 200) {
+		if (count == 10) {
 			count = 0;
 			listener->processClockTick();
 		}
@@ -37,11 +38,24 @@ void WallClock::HandleTimerInterrupt() {
 }
 
 void WallClock::Attach(WallClockListener *listener) {
-	count = 0;
 	this->listener = listener;
+	Reset();
 }
 
 void WallClock::Detach() {
-	count = 0;
 	this->listener = 0;
+	Reset();
+}
+
+void WallClock::Run() {
+	state = State::running;
+}
+
+void WallClock::Stop() {
+	state = State::stopped;
+}
+
+void WallClock::Reset() {
+	state = State::stopped;
+	count = 0;
 }

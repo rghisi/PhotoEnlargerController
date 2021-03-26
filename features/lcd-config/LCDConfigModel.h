@@ -14,6 +14,8 @@ class LCDConfigModel : public Model {
 public:
 	LCDConfigModel(LCD* lcd);
 	bool isLocked();
+	void OnActivate();
+  void OnDeactivate();
 	void IncreaseBrightness();
 	void DecreaseBrightness();
 	uint8_t GetBrightness();

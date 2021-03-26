@@ -11,8 +11,6 @@
 
 class Controller : public InputEventListener {
 public:
-	virtual void OnActivate();
-	virtual void OnDeactivate();
 
 };
 

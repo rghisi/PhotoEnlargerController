@@ -17,40 +17,39 @@ BWPrintingModel::BWPrintingModel(RGBLed *rgb_led, WallClock *wall_clock) {
 	blue_remaining_exposure_time = 0;
 	green_remaining_exposure_time = 0;
 	state = State::stopped;
-	red_power = 90;
-	green_power = 90;
-	blue_power = 90;
+	rgb_led->allOff();
+	rgb_led->SetCalibratedPower(RGBLed::PowerLevel::medium);
 }
 
-uint8_t BWPrintingModel::getGreenExposureTime() {
+uint8_t BWPrintingModel::GetGreenExposureTime() {
 	return green_exposure_time;
 }
 
-void BWPrintingModel::setGreenExposure(uint8_t seconds) {
+void BWPrintingModel::SetGreenExposure(uint8_t seconds) {
 	green_exposure_time = seconds;
 	calculateTotalExposureTime();
 }
 
-uint8_t BWPrintingModel::getBlueExposureTime() {
+uint8_t BWPrintingModel::GetBlueExposureTime() {
 	return blue_exposure_time;
 }
 
-void BWPrintingModel::setBlueExposure(uint8_t seconds) {
+void BWPrintingModel::SetBlueExposure(uint8_t seconds) {
 	blue_exposure_time = seconds;
 	calculateTotalExposureTime();
 }
 
-uint8_t BWPrintingModel::getTotalExposureTime() {
+uint8_t BWPrintingModel::GetTotalExposureTime() {
 	return total_exposure_time;
 }
 
-uint8_t BWPrintingModel::getGreenRemainingExposureTime() {
+uint8_t BWPrintingModel::GetGreenRemainingExposureTime() {
 	return green_remaining_exposure_time;
 }
-uint8_t BWPrintingModel::getBlueRemainingExposureTime() {
+uint8_t BWPrintingModel::GetBlueRemainingExposureTime() {
 	return blue_remaining_exposure_time;
 }
-uint8_t BWPrintingModel::getTotalRemainingExposureTime() {
+uint8_t BWPrintingModel::GetTotalRemainingExposureTime() {
 	return total_remaining_exposure_time;
 }
 
@@ -58,33 +57,30 @@ BWPrintingModel::State BWPrintingModel::getState() {
 	return state;
 }
 
-void BWPrintingModel::start() {
+void BWPrintingModel::Start() {
 	calculateTotalExposureTime();
-	rgb_led->setRedPower(90);
-	rgb_led->setGreenPower(90);
-	rgb_led->setBluePower(90);
-	rgb_led->redOn();
-	if (green_exposure_time > 0) {
-		rgb_led->greenOn();
-	}
-	if (blue_exposure_time > 0) {
-		rgb_led->blueOn();
-	}
 	wall_clock->Attach(this);
+	TurnOnExposureLights();
+	wall_clock->Run();
 	state = State::running;
 }
 
-void BWPrintingModel::stop() {
+void BWPrintingModel::Stop() {
 	state = State::stopped;
-	rgb_led->redOff();
-	rgb_led->greenOff();
-	rgb_led->blueOff();
+	rgb_led->allOff();
 	wall_clock->Detach();
 }
 
-void BWPrintingModel::pause() {
+void BWPrintingModel::Pause() {
 	state = State::paused;
+	wall_clock->Stop();
 	rgb_led->allOff();
+}
+
+void BWPrintingModel::Resume() {
+	TurnOnExposureLights();
+	wall_clock->Run();
+	state = State::running;
 }
 
 void BWPrintingModel::processClockTick() {
@@ -103,7 +99,7 @@ void BWPrintingModel::processClockTick() {
 			rgb_led->blueOff();
 		}
 		if (total_remaining_exposure_time == 0) {
-			stop();
+			Stop();
 		}
 		break;
 	default:
@@ -126,13 +122,42 @@ bool BWPrintingModel::isLocked() {
 	return state == State::running;
 }
 
-uint8_t BWPrintingModel::getRedPower() {
-	return red_power;
+uint8_t BWPrintingModel::GetRedPower() {
+	return rgb_led->GetRedDutyCycle();
 }
-uint8_t BWPrintingModel::getGreenPower() {
-	return green_power;
+uint8_t BWPrintingModel::GetGreenPower() {
+	return rgb_led->GetGreenDutyCycle();
 }
-uint8_t BWPrintingModel::getBluePower() {
-	return blue_power;
+uint8_t BWPrintingModel::GetBluePower() {
+	return rgb_led->GetBlueDutyCycle();
 }
 
+void BWPrintingModel::SetRedPower(uint8_t power) {
+	rgb_led->SetRedDutyCycle(power);
+}
+
+void BWPrintingModel::SetGreenPower(uint8_t power) {
+	rgb_led->SetGreenDutyCycle(power);
+}
+
+void BWPrintingModel::SetBluePower(uint8_t power) {
+	rgb_led->SetBlueDutyCycle(power);
+}
+
+void BWPrintingModel::TurnOnExposureLights() {
+	rgb_led->redOn();
+	if (green_exposure_time > 0) {
+		rgb_led->greenOn();
+	}
+	if (blue_exposure_time > 0) {
+		rgb_led->blueOn();
+	}
+}
+
+void BWPrintingModel::OnActivate() {
+
+}
+
+void BWPrintingModel::OnDeactivate() {
+
+}

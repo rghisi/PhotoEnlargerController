@@ -9,6 +9,7 @@
 #define INPUT_INPUTEVENT_H_
 
 enum class InputEvent {
+	none,
 	dialPlus,
 	dialMinus,
 	dialPushButtonPressed,
